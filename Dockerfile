@@ -15,7 +15,7 @@ RUN apk add --no-cache \
     unzip \
     && update-ca-certificates \
     && ARCH=$([ "${TARGETARCH}" = "arm64" ] && echo "arm64" || echo "amd64") \
-    && curl -fsSL "https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_${ARCH}.zip" \
+    && curl -fsSL --proto '=https' --tlsv1.2 "https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_${ARCH}.zip" \
        -o /tmp/packer.zip \
     && unzip /tmp/packer.zip -d /usr/local/bin/ \
     && rm /tmp/packer.zip \
