@@ -1,0 +1,48 @@
+schemaVersion: "2.0.0"
+
+commandTests:
+  - name: "packer version"
+    command: "packer"
+    args: ["version"]
+    expectedOutput:
+      - "Packer v"
+    exitCode: 0
+
+  - name: "packer build help available"
+    command: "packer"
+    args: ["build", "--help"]
+    exitCode: 0
+
+  - name: "packer validate help available"
+    command: "packer"
+    args: ["validate", "--help"]
+    exitCode: 0
+
+  - name: "git is available"
+    command: "git"
+    args: ["--version"]
+    expectedOutput:
+      - "git version"
+    exitCode: 0
+
+  - name: "bash is available"
+    command: "bash"
+    args: ["--version"]
+    expectedOutput:
+      - "GNU bash"
+    exitCode: 0
+
+fileExistenceTests:
+  - name: "packer binary present"
+    path: "/usr/local/bin/packer"
+    shouldExist: true
+    permissions: "-rwxr-xr-x"
+
+  - name: "workspace directory exists"
+    path: "/workspace"
+    shouldExist: true
+
+metadataTest:
+  workdir: "/workspace"
+  entrypoint: ["packer"]
+  user: "packer"
